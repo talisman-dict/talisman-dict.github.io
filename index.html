@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talisman Card Translator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="search-section">
+        <input
+          type="text"
+          id="cardSearch"
+          placeholder="Search..."
+          autocomplete="off"
+        />
+        <div id="suggestions" class="suggestions-container"></div>
+      </div>
+
+      <div id="cardResult" class="result-section">
+        <!-- The Talisman card will appear here -->
+      </div>
+    </div>
+    <script src="data/card_data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
