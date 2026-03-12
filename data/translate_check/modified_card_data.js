@@ -1,4 +1,4 @@
-const regionDatabase = {
+const cardDatabase = {
   Cascade: {
     french_name: "Cascade",
     english_name: "Waterfall",
@@ -111,9 +111,6 @@ const regionDatabase = {
     description:
       'Region: Highland Region "Roll 1 Die"\n\n Attacked by a Cave Troll with Strength 6\n\n Attacked by a Wood Ghost with Craft 3\n\n Attacked by a Wraith with Craft 5\n\n Lost for 1 turn\n\n Gain 1 gold\n\n Gain 2 gold\n\n Gain 3 gold Number of Ruined Mine spaces in the game: 1 (     1 in the Highland Region;         )',
   },
-};
-
-const cardDatabase = {
   "Alchimiste (Personnage)": {
     french_name: "Alchimiste (Personnage)",
     english_name: "Alchemist Character",

@@ -121,6 +121,8 @@ def scrape_card(french_name, url):
     content_div = soup.find("div", id="mw-content-text")
     if content_div:
         paragraphs = content_div.find_all("p", recursive=False)
+        ordered_lists = content_div.find_all("ol", recursive=False)
+        description_lists = content_div.find_all("dl", recursive=False)
         for p in paragraphs:
             b_tags = p.find_all("b")
             if len(b_tags) >= 1:
@@ -158,21 +160,30 @@ def scrape_card(french_name, url):
 
         # Extract Rules / Description
         rules_text = ""
-        for p in paragraphs:
-            text = p.get_text().strip()
-            if not text:
+        for tag in paragraphs + ordered_lists + description_lists:
+            text = ""
+            if tag.name == "ol":
+                items = tag.find_all("li", recursive=False)
+                text = "\n".join(
+                    [f"{index}. {item.get_text()}" for index, item in enumerate(items)]
+                )
+            else:
+                text = tag.get_text().strip()
+
+            should_not_contain = [
+                "Title:",
+                "Card Type:",
+                "Encounter Number:",
+                "Copies of this Card:",
+                "Character:",
+                "Sub Type:",
+                "Space:",
+                "Region:",
+                "spaces in the game:",
+            ]
+            if not text or any(keyword in text for keyword in should_not_contain):
                 continue
-            # Filter out boilerplate
-            if text.startswith("Region:") or text.startswith("Space:"):
-                cleaned = re.sub(r'Region:.*?(?="|\n|$)', "", text)
-                cleaned = re.sub(r'Space:.*?(?="|\n|$)', "", cleaned)
-                text = cleaned.strip()
-
-            if "Number of" in text and "spaces in the game" in text:
-                text = re.sub(r"Number of.*?spaces in the game:.*?\)", "", text).strip()
-
-            if len(text) > 5:
-                rules_text += text + "\n"
+            rules_text += text + "\n"
 
         card_info["rules"] = rules_text.strip()
 
@@ -227,10 +238,8 @@ def main():
             }
 
     with open(JS_FILE, "w", encoding="utf-8") as f:
-        f.write("export const regionDatabase = ")
+        f.write("const cardDatabase = ")
         f.write(json.dumps(region_db, ensure_ascii=False, indent=2))
-        f.write(";\n\n")
-        f.write("export const cardDatabase = ")
         f.write(json.dumps(card_db, ensure_ascii=False, indent=2))
         f.write(";")
 
