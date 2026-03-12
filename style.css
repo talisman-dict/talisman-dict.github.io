@@ -1,27 +1,29 @@
 :root {
-    --card-width: 85vw;
-    --card-max-width: 280px;
-    --gold: #c5a059;
-    --dark-gold: #8b6d3a;
-    --parchment: #f4e4bc;
-    --text-black: #1a1a1a;
-    --bg-dark: #121212;
+    --card-width: 90vw;
+    --card-max-width: 340px;
+    --primary-black: #111;
+    --secondary-grey: #666;
+    --border-light: #e0e0e0;
+    --bg-page: #f2f2f2;
+    --white: #ffffff;
+    --accent: #000;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Georgia', serif;
-    background-color: var(--bg-dark);
-    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--primary-black);
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
 .app-container {
     width: 100%;
     max-width: 500px;
-    padding: 20px;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,169 +32,171 @@ body {
 /* Search Bar */
 .search-section {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: sticky;
     top: 20px;
     z-index: 100;
 }
 
+#cardSearch {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.1rem;
+    border: 1px solid var(--primary-black);
+    background: var(--white);
+    color: var(--primary-black);
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 0;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    transition: transform 0.1s ease;
+}
+
+#cardSearch:focus {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.15);
+}
+
 .suggestions-container {
     width: 100%;
-    background: #2a2a2a;
-    border: 1px solid var(--gold);
+    background: var(--white);
+    border: 1px solid var(--primary-black);
     border-top: none;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     display: none;
     position: absolute;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.1);
 }
 
 .suggestion-item {
-    padding: 10px 15px;
+    padding: 12px 18px;
     cursor: pointer;
-    border-bottom: 1px solid #3a3a3a;
-    color: #ddd;
-    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--primary-black);
+    font-size: 0.95rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
 }
 
 .suggestion-item:hover {
-    background: #3a3a3a;
-    color: var(--gold);
+    background: #f9f9f9;
 }
 
 .suggestion-item .eng {
     font-weight: bold;
+    margin-bottom: 2px;
 }
 
 .suggestion-item .fra {
     font-style: italic;
-    font-size: 0.8rem;
-    opacity: 0.7;
-}
-
-#cardSearch {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.2rem;
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    background: #2a2a2a;
-    color: white;
-    box-sizing: border-box;
-    outline: none;
-    transition: box-shadow 0.3s ease;
-}
-
-#cardSearch:focus {
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    font-size: 0.85rem;
+    color: var(--secondary-grey);
 }
 
 /* Talisman Card UI */
 .talisman-card {
     width: var(--card-width);
     max-width: var(--card-max-width);
-    background-color: var(--parchment);
-    border: 4px solid var(--gold);
-    border-radius: 10px;
-    color: var(--text-black);
+    background-color: var(--white);
+    border: 1px solid var(--primary-black);
+    color: var(--primary-black);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-    overflow: hidden;
-    animation: fadeIn 0.4s ease-out;
+    box-shadow: 15px 15px 0px rgba(0,0,0,0.05);
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 } 
 
 .card-header {
-    background: var(--gold);
-    padding: 12px 10px;
-    text-align: center;
+    padding: 30px 25px 15px 25px;
+    text-align: left;
 }
 
 .card-name {
     margin: 0;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    font-family: 'Georgia', serif;
+    font-size: 1.6rem;
+    line-height: 1.1;
     font-weight: bold;
-    color: #111;
+    color: var(--primary-black);
 }
 
 .card-french-name {
-    margin: 3px 0 0 0;
-    font-size: 0.85rem;
+    margin: 6px 0 0 0;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
     font-style: italic;
-    color: rgba(0,0,0,0.6);
+    color: var(--secondary-grey);
 }
 
 .card-image-box {
     width: 100%;
-    height: 180px;
-    background: #1a1a1a;
+    padding: 0 25px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
 }
 
 .card-image-box img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 220px;
     object-fit: contain;
 }
 
 .card-category {
-    padding: 6px 15px;
+    margin: 25px 25px 0 25px;
+    padding: 15px 0;
     font-size: 0.7rem;
-    font-weight: bold;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--dark-gold);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    text-align: center;
-    background: rgba(0, 0, 0, 0.02);
+    letter-spacing: 2px;
+    color: var(--primary-black);
+    border-top: 1px solid var(--primary-black);
+    text-align: left;
 }
 
 .card-info {
-    padding: 20px 15px;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    padding: 10px 25px 40px 25px;
+    font-size: 1rem;
+    line-height: 1.6;
     text-align: left;
-    flex-grow: 1;
     white-space: pre-line;
-    color: var(--text-black);
+    color: #333;
 }
 
 .card-footer {
-    padding: 10px;
-    text-align: center;
-    background: rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 15px 25px;
+    text-align: left;
+    border-top: 1px solid var(--border-light);
 }
 
 .card-footer a {
-    color: var(--dark-gold);
+    color: var(--secondary-grey);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .card-footer a:hover {
+    color: var(--primary-black);
     text-decoration: underline;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .no-result {
-    color: #888;
+    color: var(--secondary-grey);
     font-style: italic;
     margin-top: 50px;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }

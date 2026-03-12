@@ -40,6 +40,9 @@ function renderCard(card) {
             <div class="card-info">
                 ${card.rules}
             </div>
+            <div class="card-footer">
+                <a href="${card.wiki_url}" target="_blank">View on Talisman Wiki</a>
+            </div>
         </div>
     `;
 }
