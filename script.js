@@ -21,7 +21,11 @@ function renderCard(card) {
   }
 
   const imagePath = `data/img/${card.image_file}`;
-  resultContainer.innerHTML = `
+    const categories = [...new Set([card.type, card.card_type, card.subtype])]
+      .filter(x => x && x.trim() !== "")
+      .join(" | ");
+
+    resultContainer.innerHTML = `
         <div class="talisman-card">
             <div class="card-header">
                 <h2 class="card-name">${card.english_name}</h2>
@@ -30,8 +34,11 @@ function renderCard(card) {
             <div class="card-image-box">
                 <img src="${imagePath}" alt="${card.english_name}" onerror="this.src='https://via.placeholder.com/300x220?text=Image+Manquante'">
             </div>
+            <div class="card-category">
+                ${categories}
+            </div>
             <div class="card-info">
-                ${card.description}
+                ${card.rules}
             </div>
         </div>
     `;
